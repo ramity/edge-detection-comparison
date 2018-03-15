@@ -38,3 +38,10 @@
 - cv2
 - time
 - csv
+
+---
+
+# Questions:
+
+- Does our stats need to factor in gaussianBlur for the edge algorithms that use it?
+- Do we need to write a project report?
