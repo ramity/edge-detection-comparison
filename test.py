@@ -15,8 +15,10 @@ with open("./stats.csv", "w") as csv_file:
 
         original = cv2.imread("./" + str(z) + "/original.jpg")
 
+        gaussian_start = time.time()
         gray = cv2.cvtColor(original, cv2.COLOR_BGR2GRAY)
         original_gaussian = cv2.GaussianBlur(gray,(3,3),0)
+        gaussian_time = time.time() - gaussian_start
 
         canny_start = time.time()
         canny = cv2.Canny(original,100,200)
@@ -29,13 +31,13 @@ with open("./stats.csv", "w") as csv_file:
         prewitt_x = cv2.filter2D(original_gaussian, -1, kernel_x)
         prewitt_y = cv2.filter2D(original_gaussian, -1, kernel_y)
         prewitt = prewitt_x + prewitt_y
-        prewitt_time = time.time() - prewitt_start
+        prewitt_time = time.time() - prewitt_start + gaussian_time
 
         sobel_start = time.time()
         sobel_x = cv2.Sobel(original_gaussian,cv2.CV_8U,1,0,ksize=5)
         sobel_y = cv2.Sobel(original_gaussian,cv2.CV_8U,0,1,ksize=5)
         sobel = sobel_x + sobel_y
-        sobel_time = time.time() - sobel_start
+        sobel_time = time.time() - sobel_start + gaussian_time
 
         laplacian_start = time.time()
         laplacian = cv2.Laplacian(original,cv2.CV_64F)
