@@ -9,7 +9,6 @@
         - original.jpg
     - 40/
         - original.jpg
-    - stats.csv
     - test.py
 
 ---
